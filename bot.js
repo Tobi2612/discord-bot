@@ -28,17 +28,33 @@ client.on('messageCreate', (message) => {
 
     // console.log(`${message.author.tag}: ${message.content}`)
 
-    if (message.author.id == 135846420421804034) {
-        return message.reply(`No one cares`)
-    }
+    // if (message.author.id == 135846420421804034) {
+    //     return message.reply(`No one cares`)
+    // }
 
-    if ((message.content) === 'hello' || (message.content) === 'Hello') {
+    if ((message.content).toLowerCase() == 'hello') {
         message.channel.send('Hello');
     }
+    // switch(message.content) {
+    //     case '!21':
+    //         message.reply(`SKRAIGHT UP`)
+    //       break;
+    //     case '!9+10':
+    //         message.reply(`21 :SpaceyHype:`)
+    //       break;
+    //     case '!21':
+    //         message.reply(`SKRAIGHT UP`)
+    //       break;
+    //     case '!21':
+    //         message.reply(`SKRAIGHT UP`)
+    //       break;
+    //     default:
+    //       continue
+    //   }
 
     if ((message.content.includes('SpaceyBot')) || (message.content.includes('Spaceybot')) || (message.content.includes('spaceybot')) || (message.content.includes('spaceyBot'))) {
-        // message.reply(`Dont @ me :angry:`)
-        message.channel.send('@everyone');
+        message.reply(`Dont @ me :angry:`)
+        // message.channel.send('@everyone');
 
     }
 
@@ -46,6 +62,13 @@ client.on('messageCreate', (message) => {
         // console.log(message.author)
         message.reply(`You are ${Math.floor(Math.random() * 100)}% down bad.`)
     }
+    if ((message.content) == '!21') {
+        message.reply(`SKRAIGHT UP`)
+    }
+    if ((message.content) == '!9+10') {
+        message.reply(`21 :SpaceyHype:`)
+    }
+
     if ((message.content) == '!sus') {
         message.reply(`You are ${Math.floor(Math.random() * 100)}% sus.`)
     }
