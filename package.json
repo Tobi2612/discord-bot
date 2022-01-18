@@ -16,5 +16,8 @@
     "dotenv": "^14.2.0",
     "node-twitch": "^0.4.5",
     "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "16.7.0"
   }
 }
