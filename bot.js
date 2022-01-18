@@ -122,7 +122,7 @@ const goLive2 = async (userr) => {
     }
 }
 
-// setInterval(goLive, 180000)
+setInterval(goLive, 180000)
 
 client.login(process.env.DISCORDJS_BOT_TOKEN)
 
