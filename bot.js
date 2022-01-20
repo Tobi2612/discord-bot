@@ -52,8 +52,14 @@ client.on('messageCreate', (message) => {
     //       continue
     //   }
 
-    if ((message.content.includes('SpaceyBot')) || (message.content.includes('Spaceybot')) || (message.content.includes('spaceybot')) || (message.content.includes('spaceyBot'))) {
+    if ((message.content.toLowerCase().includes('spaceybot'))) {
         message.reply(`Dont @ me :angry:`)
+        // message.channel.send('@everyone');
+
+    }
+
+    if ((message.content.toLowerCase().includes('good morning'))) {
+        message.channel.send(`Good morning ${message.author.tag}`)
         // message.channel.send('@everyone');
 
     }
