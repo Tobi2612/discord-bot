@@ -101,6 +101,9 @@ client.on('messageCreate', async (message) => {
     if ((message.content) === '!live') {
         message.channel.send('Hey @everyone, Jess is now live on https://www.twitch.tv/spaceyflower21 ! Go check it out!')
     }
+    if ((message.content) === '!cap') {
+        message.channel.send('Fat Cock')
+    }
 
     if (message.content.startsWith('!')) {
         const [CMD_NAME, ...args] = message.content
@@ -117,9 +120,31 @@ client.on('messageCreate', async (message) => {
             let strr = conv2.join('')
 
             const member = message.guild.members.cache.get(strr)
-            // const banMessage = ['has been sent into the void KEKW', '']
+            const banMessage = [
+                'sike nerd :rofl:',
+                'has been sent into the void KEKW',
+                'https://tenor.com/view/moe-simpsons-barney-e-moe-gif-23054386',
+                'https://tenor.com/view/among-us-ban-among-us-ban-imposter-ban-gif-18884723',
+                'https://tenor.com/view/spongebob-ban-pubg-lite-banned-rainbow-gif-16212382',
+                'https://tenor.com/view/bongocat-banhammer-ban-hammer-bongo-gif-18219363',
+                'https://tenor.com/view/moe-simpsons-barney-e-moe-gif-23054386',
+                'https://tenor.com/view/mario-yoshi-hammer-hit-gif-14834810',
+                'https://tenor.com/view/go-home-leave-golden-girls-just-go-you-have-to-go-now-gif-22287144',
+                'https://tenor.com/view/throw-him-out-gif-14876020',
+                'https://tenor.com/view/moe-simpsons-barney-e-moe-gif-23054386',
+                'https://tenor.com/view/gtfo-fresh-prince-thrown-out-kicked-out-gif-5919348',
+                'https://tenor.com/view/get-out-out-close-door-gif-12559327',
+                'https://tenor.com/view/kicked-out-kicked-thrown-out-get-out-of-the-house-gif-23257249',
+                'https://tenor.com/view/fail-bounce-mattress-bed-prank-gif-13006950',
+                'https://tenor.com/view/drag-dragging-gif-11404125',
+                'https://tenor.com/view/fire-throw-out-kick-kick-out-boot-out-gif-15900658',
+                'https://tenor.com/view/moe-simpsons-barney-e-moe-gif-23054386',
+            ]
             if (member) {
-                message.channel.send(`${member} has been sent into the void :YIKERS:`)
+                min = Math.ceil(0);
+                max = Math.floor((banMessage.length) - 1);
+                let banRandom = Math.floor(Math.random() * (max - min + 1)) + min;
+                message.channel.send(`${member} ${banMessage[banRandom]}`)
             }
 
             else {
