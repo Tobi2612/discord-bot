@@ -59,7 +59,7 @@ client.on('messageCreate', (message) => {
     }
 
     if ((message.content.toLowerCase().includes('good morning'))) {
-        message.channel.send(`Good morning @${message.author.tag}`)
+        message.channel.send(`Good morning <@${message.author.id}>`)
         // message.channel.send('@everyone');
 
     }
