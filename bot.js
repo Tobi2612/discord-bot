@@ -1,4 +1,5 @@
 const dotenv = require('dotenv');
+const axios = require('axios');
 const { Client, Intents, Message } = require('discord.js');
 const TwitchApi = require("node-twitch").default;
 
@@ -123,6 +124,29 @@ client.on('messageCreate', (message) => {
             }
             checkLive()
         }
+
+        if (CMD_NAME === 'joke') {
+            const getJoke = async () => {
+                let jokes = await getJokes()
+
+                if (jokes.error == true) {
+                    message.reply(`Error encountered! \n My bad :slight_smile:`)
+                }
+                if (jokes.type == 'single') {
+                    message.reply(`${joke.joke}`)
+                }
+                function punchline(joke) {
+                    return message.reply(`${joke.punchline}`)
+                }
+
+                if (jokes.type == 'twopart') {
+                    message.reply(`${joke.setup}`)
+                    setTimeout(punchline(jokes), 3000)
+                }
+
+            }
+            getJoke()
+        }
     }
 })
 
@@ -160,6 +184,16 @@ const goLive2 = async (userr) => {
     }
     else {
         return false
+    }
+}
+
+const getJokes = async () => {
+    try {
+        let response = await axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist')
+        let joke = response.data
+        return joke
+    } catch (e) {
+        console.error(e)
     }
 }
 
