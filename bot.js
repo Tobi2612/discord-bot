@@ -64,6 +64,18 @@ client.on('messageCreate', (message) => {
 
     }
 
+    if ((message.content.toLowerCase().includes('ok bye'))) {
+        message.channel.send(`https://tenor.com/view/bye-okay-slide-gif-15172486`)
+        // message.channel.send('@everyone');
+
+    }
+
+    if ((message.content.toLowerCase().includes('ok hi'))) {
+        message.channel.send(`https://tenor.com/view/ok-hi-hi-hello-ok-bye-ok-hi-kid-gif-19799968`)
+        // message.channel.send('@everyone');
+
+    }
+
     if ((message.content) == '!down') {
         // console.log(message.author)
         message.reply(`You are ${Math.floor(Math.random() * 100)}% down bad.`)
