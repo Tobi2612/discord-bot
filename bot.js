@@ -133,10 +133,10 @@ client.on('messageCreate', async (message) => {
 
         if (CMD_NAME === 'joke') {
             const getJoke = async () => {
-                let jokes = await getJokes()
+                let jokes = await getJokes('joke')
 
                 if (jokes.error == true) {
-                    message.reply(`Error encountered! \n My bad :slight_smile:`)
+                    message.reply(`I don't have a joke for you at the moment, try again in a minute! \nMy bad :neutral_face:`)
                 }
                 if (jokes.type == 'single') {
                     message.reply(`${jokes.joke}`)
@@ -148,6 +148,24 @@ client.on('messageCreate', async (message) => {
 
             }
             getJoke()
+        }
+
+        if (CMD_NAME === 'dadjoke') {
+            const getDadJoke = async () => {
+                let jokes = await getJokes('dadjoke')
+
+                if (jokes) {
+                    if (jokes.status == 200) {
+                        message.reply(`${jokes.joke}`)
+                    }
+                }
+
+                else {
+                    message.reply(`I don't have a joke for you at the moment, try again in a minute! \nMy bad :neutral_face:`)
+                }
+
+            }
+            getDadJoke()
         }
     }
 })
@@ -189,13 +207,34 @@ const goLive2 = async (userr) => {
     }
 }
 
-const getJokes = async () => {
-    try {
-        let response = await axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist')
-        let joke = response.data
-        return joke
-    } catch (e) {
-        console.error(e)
+const getJokes = async (type_of_joke) => {
+    if (type_of_joke == 'joke') {
+        try {
+            let response = await axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist')
+            let joke = response.data
+            return joke
+        } catch (e) {
+            // console.error(e)
+        }
+    }
+
+    if (type_of_joke == 'dadjoke') {
+        try {
+            const options = {
+                headers: {
+                    'Accept': 'application/json',
+                    "User-Agent": "axios 0.21.1"
+                }
+            }
+            let dad_response = await axios.get('https://icanhazdadjoke.com/', options)
+
+            let dadjoke = dad_response.data
+            console.log(dadjoke)
+            return dadjoke
+
+        } catch (e) {
+            // console.error(e)
+        }
     }
 }
 
