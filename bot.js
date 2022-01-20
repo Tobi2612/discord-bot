@@ -119,7 +119,7 @@ client.on('messageCreate', async (message) => {
             const member = message.guild.members.cache.get(strr)
             // const banMessage = ['has been sent into the void KEKW', '']
             if (member) {
-                message.channel.send(`${member} has been sent into the void :9029_hehe_pepe:`)
+                message.channel.send(`${member} has been sent into the void :YIKERS:`)
             }
 
             else {
