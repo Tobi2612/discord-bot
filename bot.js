@@ -133,11 +133,11 @@ client.on('messageCreate', async (message) => {
                     message.reply(`Error encountered! \n My bad :slight_smile:`)
                 }
                 if (jokes.type == 'single') {
-                    message.reply(`${joke.joke}`)
+                    message.reply(`${jokes.joke}`)
                 }
 
                 if (jokes.type == 'twopart') {
-                    message.reply(`${joke.setup} \n\n\n ${joke.punchline}`)
+                    message.reply(`${jokes.setup} \n\n\n ${jokes.punchline}`)
                 }
 
             }
