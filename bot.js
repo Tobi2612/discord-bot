@@ -59,6 +59,12 @@ client.on('messageCreate', async (message) => {
 
     }
 
+    if ((message.content.includes('@932996374562238474'))) {
+        message.reply(` What??? :neutral_face:`)
+        // message.channel.send('@everyone');
+
+    }
+
     if ((message.content.toLowerCase().includes('good morning'))) {
         message.channel.send(`Good morning <@${message.author.id}>`)
         // message.channel.send('@everyone');
