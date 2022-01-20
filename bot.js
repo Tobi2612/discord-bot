@@ -137,7 +137,7 @@ client.on('messageCreate', async (message) => {
                 }
 
                 if (jokes.type == 'twopart') {
-                    message.reply(`${jokes.setup} \n\n\n ${jokes.punchline}`)
+                    message.reply(`${jokes.setup} \n\n\n ${jokes.delivery}`)
                 }
 
             }
