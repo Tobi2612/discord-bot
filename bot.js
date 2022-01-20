@@ -135,13 +135,9 @@ client.on('messageCreate', (message) => {
                 if (jokes.type == 'single') {
                     message.reply(`${joke.joke}`)
                 }
-                function punchline(joke) {
-                    return message.reply(`${joke.punchline}`)
-                }
 
                 if (jokes.type == 'twopart') {
-                    message.reply(`${joke.setup}`)
-                    setTimeout(punchline(jokes), 3000)
+                    message.reply(`${joke.setup} \n\n\n ${joke.punchline}`)
                 }
 
             }
