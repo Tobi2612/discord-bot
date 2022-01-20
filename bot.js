@@ -22,7 +22,7 @@ client.on('ready', () => {
     console.log(`${client.user.tag} has logged in`)
 });
 
-client.on('messageCreate', (message) => {
+client.on('messageCreate', async (message) => {
     if (message.author.bot) {
         return
     };
