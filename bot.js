@@ -102,6 +102,32 @@ client.on('messageCreate', async (message) => {
         message.channel.send('Hey @everyone, Jess is now live on https://www.twitch.tv/spaceyflower21 ! Go check it out!')
     }
 
+    if (message.content.startsWith('!')) {
+        const [CMD_NAME, ...args] = message.content
+            .trim()
+            .substring(PREFIX.length)
+            .split(/\s+/);
+
+        if (CMD_NAME === 'ban') {
+            let conv = [...args[0]]
+            // let nooo = parseInt(args[0])
+            // console.log(`Conv to array: ${nooo}`)
+            conv.pop()
+            conv2 = conv.slice(3)
+            let strr = conv2.join('')
+
+            const member = message.guild.members.cache.get(strr)
+            // const banMessage = ['has been sent into the void KEKW', '']
+            if (member) {
+                message.channel.send(`${member} has been sent into the void :9029_hehe_pepe:`)
+            }
+
+            else {
+                message.reply(`Ban who??? :FeelsWeirdMan:`)
+            }
+        }
+    }
+
 
     if (message.content.startsWith(PREFIX)) {
         const [CMD_NAME, ...args] = message.content
@@ -114,6 +140,8 @@ client.on('messageCreate', async (message) => {
         //     console.log(member)
         //     message.channel.send(`${member} has been banned KEKW`)
         // }
+
+
 
         if (CMD_NAME === 'live') {
             if (args.length === 0) return (message.reply('Please provide an argument'))
