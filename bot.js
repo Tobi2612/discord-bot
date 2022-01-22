@@ -115,14 +115,23 @@ client.on('messageCreate', async (message) => {
 
         //HEROKU ERROR OCCURED PUSH OF THIS SECTION ? ROLLBACK?
         if (CMD_NAME === 'ban') {
-            let conv = [...args[0]]
-            // let nooo = parseInt(args[0])
-            // console.log(`Conv to array: ${nooo}`)
-            conv.pop()
-            conv2 = conv.slice(3)
-            let strr = conv2.join('')
+            // let conv = [...args[0]]
+            let conv2 = args[0]
+            // // let nooo = parseInt(args[0])
+            // // console.log(`Conv to array: ${nooo}`)
+            // conv.pop()
+            // conv2 = conv.slice(3)
+            // let strr = conv2.join('')
+            // console.log(`Conv before regex: ${conv2}`)
 
-            const member = message.guild.members.cache.get(strr)
+
+            let new_conv = conv2.replace(/[\\<>@#&!]/g, "");
+            // console.log(`Conv to array: ${conv}`)
+            // console.log(`Conv after regex: ${new_conv}`)
+
+            const member = message.guild.members.cache.get(new_conv)
+
+            console.log(member)
             const banMessage = [
                 'sike nerd :rofl:',
                 'has been sent into the void KEKW',
