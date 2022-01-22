@@ -107,6 +107,9 @@ client.on('messageCreate', async (message) => {
     if ((message.content) === '!live') {
         message.channel.send('Hey @everyone, Jess is now live on https://www.twitch.tv/spaceyflower21 ! Go check it out!')
     }
+    if ((message.content) === '!ben') {
+        message.channel.send('Super clutch :slight_smile:')
+    }
 
     //HEROKU ERROR OCCURED PUSH OF THIS SECTION ? ROLLBACK?
     if ((message.content) === '!cap') {
