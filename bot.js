@@ -59,8 +59,14 @@ client.on('messageCreate', async (message) => {
 
     }
 
-    if ((message.content.includes('@932996374562238474'))) {
-        message.reply(` What??? :neutral_face:`)
+    if ((message.content.includes('@932996374562238474')) || (message.content.includes('<@!932996374562238474>'))) {
+        if (message.content.includes('!ban')) {
+
+        }
+        else {
+            message.reply(` What??? :face_with_raised_eyebrow:`)
+        }
+        // message.reply(` What??? :face_with_raised_eyebrow:`)
         // message.channel.send('@everyone');
 
     }
@@ -128,7 +134,9 @@ client.on('messageCreate', async (message) => {
             let new_conv = conv2.replace(/[\\<>@#&!]/g, "");
             // console.log(`Conv to array: ${conv}`)
             // console.log(`Conv after regex: ${new_conv}`)
-
+            if (new_conv == '932996374562238474') {
+                return message.reply(`Ban who??? :rofl: :rofl:`)
+            }
             const member = message.guild.members.cache.get(new_conv)
 
             console.log(member)
@@ -160,7 +168,7 @@ client.on('messageCreate', async (message) => {
             }
 
             else {
-                message.reply(`Ban who??? :FeelsWeirdMan:`)
+                message.reply(`Ban who??? :neutral_face:`)
             }
         }
     }
@@ -294,7 +302,7 @@ const getJokes = async (type_of_joke) => {
             let dad_response = await axios.get('https://icanhazdadjoke.com/', options)
 
             let dadjoke = dad_response.data
-            console.log(dadjoke)
+            // console.log(dadjoke)
             return dadjoke
 
         } catch (e) {
