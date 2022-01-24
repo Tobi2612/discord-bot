@@ -119,7 +119,7 @@ client.on('messageCreate', async (message) => {
     if ((message.content) === '!map') {
         const getCurrentMap = async () => {
             let current_map = await getMap()
-            message.channel.send(`Current br map is ${current_map.battle_royale.current.map} and rotates in ${current_map.battle_royale.current.remainingMins} minutes`)
+            message.channel.send(`Current map is ${current_map.battle_royale.current.map} and rotates in ${current_map.battle_royale.current.remainingMins} minutes`)
         }
         getCurrentMap()
     }
