@@ -116,6 +116,14 @@ client.on('messageCreate', async (message) => {
         message.channel.send('Fat Cock')
     }
 
+    if ((message.content) === '!map') {
+        const getCurrentMap = async () => {
+            let current_map = await getMap()
+            message.channel.send(`Current br map is ${current_map.battle_royale.current.map} and rotates in ${current_map.battle_royale.current.remainingMins} minutes`)
+        }
+        getCurrentMap()
+    }
+
     if (message.content.startsWith('!')) {
         const [CMD_NAME, ...args] = message.content
             .trim()
@@ -267,6 +275,16 @@ const goLive = async () => {
     else {
         // console.log('offline')
         liveState = 0
+    }
+}
+
+const getMap = async () => {
+    try {
+        let mapp = await axios.get(`https://api.mozambiquehe.re/maprotation?version=5&auth=${process.env.APEX_LEGENDS_API_KEY}`)
+        let map_data = mapp.data
+        return map_data
+    } catch (e) {
+        console.error(e)
     }
 }
 
