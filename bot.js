@@ -119,7 +119,26 @@ client.on('messageCreate', async (message) => {
     if ((message.content) === '!map') {
         const getCurrentMap = async () => {
             let current_map = await getMap()
-            message.channel.send(`Current map is ${current_map.battle_royale.current.map} and rotates in ${current_map.battle_royale.current.remainingMins} minutes`)
+            if (current_map.battle_royale.current.remainingMins >= 120 && current_map.battle_royale.current.remainingMins < 180) {
+                remaining_time = current_map.battle_royale.current.remainingMins - 120
+                timee = `2 hours and ${remaining_time}`
+            }
+            else if (current_map.battle_royale.current.remainingMins >= 60 && current_map.battle_royale.current.remainingMins < 120) {
+                remaining_time = current_map.battle_royale.current.remainingMins - 60
+                timee = `1 hour and ${remaining_time}`
+            }
+
+            else if (current_map.battle_royale.current.remainingMins < 60) {
+                remaining_time = current_map.battle_royale.current.remainingMins
+                timee = `${remaining_time}`
+            }
+
+            else {
+                remaining_time = current_map.battle_royale.current.remainingMins
+                timee = `${remaining_time}`
+            }
+
+            message.channel.send(`Current map is ${current_map.battle_royale.current.map} and rotates in ${timee} minutes :slight_smile:`)
         }
         getCurrentMap()
     }
