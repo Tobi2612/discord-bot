@@ -40,26 +40,9 @@ client.on('messageCreate', async (message) => {
     if ((message.content).toLowerCase() == 'hello') {
         message.channel.send('Hello');
     }
-    // switch(message.content) {
-    //     case '!21':
-    //         message.reply(`SKRAIGHT UP`)
-    //       break;
-    //     case '!9+10':
-    //         message.reply(`21 :SpaceyHype:`)
-    //       break;
-    //     case '!21':
-    //         message.reply(`SKRAIGHT UP`)
-    //       break;
-    //     case '!21':
-    //         message.reply(`SKRAIGHT UP`)
-    //       break;
-    //     default:
-    //       continue
-    //   }
 
     if ((message.content.toLowerCase().includes('spaceybot'))) {
         message.reply(`Dont @ me :angry:`)
-        // message.channel.send('@everyone');
 
     }
 
