@@ -33,6 +33,10 @@ client.on('messageCreate', async (message) => {
     //     return message.reply(`No one cares`)
     // }
 
+    // if (message.channelId == 801933050949926984) {
+    //     return message.channel.send(`:eyes:`)
+    // }
+
     if ((message.content).toLowerCase() == 'hello') {
         message.channel.send('Hello');
     }
@@ -117,30 +121,36 @@ client.on('messageCreate', async (message) => {
     }
 
     if ((message.content) === '!map') {
-        const getCurrentMap = async () => {
-            let current_map = await getMap()
-            if (current_map.battle_royale.current.remainingMins >= 120 && current_map.battle_royale.current.remainingMins < 180) {
-                remaining_time = current_map.battle_royale.current.remainingMins - 120
-                timee = `2 hours and ${remaining_time}`
-            }
-            else if (current_map.battle_royale.current.remainingMins >= 60 && current_map.battle_royale.current.remainingMins < 120) {
-                remaining_time = current_map.battle_royale.current.remainingMins - 60
-                timee = `1 hour and ${remaining_time}`
-            }
+        if (message.channelId == 801881827916513320 || message.channelId == 803352079519318098 || message.channelId == 933130158595002371) {
+            const getCurrentMap = async () => {
+                let current_map = await getMap()
+                if (current_map.battle_royale.current.remainingMins >= 120 && current_map.battle_royale.current.remainingMins < 180) {
+                    remaining_time = current_map.battle_royale.current.remainingMins - 120
+                    timee = `2 hours and ${remaining_time}`
+                }
+                else if (current_map.battle_royale.current.remainingMins >= 60 && current_map.battle_royale.current.remainingMins < 120) {
+                    remaining_time = current_map.battle_royale.current.remainingMins - 60
+                    timee = `1 hour and ${remaining_time}`
+                }
 
-            else if (current_map.battle_royale.current.remainingMins < 60) {
-                remaining_time = current_map.battle_royale.current.remainingMins
-                timee = `${remaining_time}`
-            }
+                else if (current_map.battle_royale.current.remainingMins < 60) {
+                    remaining_time = current_map.battle_royale.current.remainingMins
+                    timee = `${remaining_time}`
+                }
 
-            else {
-                remaining_time = current_map.battle_royale.current.remainingMins
-                timee = `${remaining_time}`
-            }
+                else {
+                    remaining_time = current_map.battle_royale.current.remainingMins
+                    timee = `${remaining_time}`
+                }
 
-            message.channel.send(`Current map is ${current_map.battle_royale.current.map} and rotates in ${timee} minutes :slight_smile:`)
+                message.channel.send(`Current map is ${current_map.battle_royale.current.map} and rotates in ${timee} minutes :slight_smile:`)
+            }
+            getCurrentMap()
         }
-        getCurrentMap()
+
+        else {
+            message.channel.send(`This command only works in the gaming channel :unamused:`)
+        }
     }
 
     if (message.content.startsWith('!')) {
