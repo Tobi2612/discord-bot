@@ -43,7 +43,7 @@ client.on('messageCreate', async (message) => {
 
     if ((message.content.toLowerCase().includes('spaceybot'))) {
         message.reply(`Dont @ me :angry:`)
-        yy
+
     }
 
     if ((message.content.includes('@932996374562238474')) || (message.content.includes('<@!932996374562238474>'))) {
