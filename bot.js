@@ -76,10 +76,11 @@ client.on('messageCreate', async (message) => {
 
     }
 
-    if ((message.content) == '!down') {
-        // console.log(message.author)
-        message.reply(`You are ${Math.floor(Math.random() * 100)}% down bad.`)
-    }
+    // if ((message.content) == '!down') {
+    //     // console.log(message.author)
+    //     message.reply(`You are ${Math.floor(Math.random() * 100)}% down bad.`)
+    // }
+
     if ((message.content) == '!21') {
         message.reply(`SKRAIGHT UP`)
     }
@@ -102,11 +103,21 @@ client.on('messageCreate', async (message) => {
     if ((message.content) === '!cap') {
         message.channel.send('Fat Cock')
     }
+    // if ((message.content) === '!jess') {
+    //     message.channel.send(`But Jeff on thursdays :slight_smile:`)
+    // }
+    // if ((message.content) === '!sno') {
+    //     message.channel.send('hmm hook me up mijah')
+    // }
+    // if ((message.content) === '!jared') {
+    //     message.channel.send('Jared has bitch and moaned 5 times today. Nothing to see here, just being a bitch again.')
+    // }
 
     if ((message.content) === '!map') {
         if (message.channelId == 801881827916513320 || message.channelId == 803352079519318098 || message.channelId == 933130158595002371) {
             const getCurrentMap = async () => {
                 let current_map = await getMap()
+                console.log(current_map)
                 if (current_map.battle_royale.current.remainingMins >= 120 && current_map.battle_royale.current.remainingMins < 180) {
                     remaining_time = current_map.battle_royale.current.remainingMins - 120
                     timee = `2 hours and ${remaining_time}`
@@ -127,6 +138,7 @@ client.on('messageCreate', async (message) => {
                 }
 
                 message.channel.send(`Current map is ${current_map.battle_royale.current.map} and rotates in ${timee} minutes :slight_smile:`)
+                // message.channel.send(`Current Map: ${current_map.battle_royale.current.map}, ${timee} minutes till ${current_map.battle_royale.next.map} for ${current_map.battle_royale.next.DurationInMinutes} minutes :slight_smile:`)
             }
             getCurrentMap()
         }
@@ -141,6 +153,81 @@ client.on('messageCreate', async (message) => {
             .trim()
             .substring(PREFIX.length)
             .split(/\s+/);
+
+        if (CMD_NAME === 'toxic') {
+            let conv2 = args[0]
+            if (conv2) {
+                var new_conv = conv2.replace(/[\\<>@#&!]/g, "");
+            }
+
+
+            const member = message.guild.members.cache.get(message.author.id)
+            const receipient = message.guild.members.cache.get(new_conv)
+
+            if (args.length === 0) {
+                return message.channel.send(`${member} is being ${Math.floor(Math.random() * 100)}% toxic`)
+            }
+
+            if (receipient) {
+                return message.channel.send(`${receipient} is being ${Math.floor(Math.random() * 100)}% toxic`)
+
+            }
+
+            else {
+                message.channel.send(`${member} is being ${Math.floor(Math.random() * 100)}% toxic`)
+            }
+
+        }
+
+        if (CMD_NAME === 'petty') {
+            let conv2 = args[0]
+            if (conv2) {
+                var new_conv = conv2.replace(/[\\<>@#&!]/g, "");
+            }
+
+
+            const member = message.guild.members.cache.get(message.author.id)
+            const receipient = message.guild.members.cache.get(new_conv)
+
+            if (args.length === 0) {
+                return message.channel.send(`${member} is being ${Math.floor(Math.random() * 100)}% petty`)
+            }
+
+            if (receipient) {
+                return message.channel.send(`${receipient} is being ${Math.floor(Math.random() * 100)}% petty`)
+
+            }
+
+            else {
+                message.channel.send(`${member} is being ${Math.floor(Math.random() * 100)}% petty`)
+            }
+
+        }
+
+        if (CMD_NAME === 'down') {
+            let conv2 = args[0]
+            if (conv2) {
+                var new_conv = conv2.replace(/[\\<>@#&!]/g, "");
+            }
+
+
+            const member = message.guild.members.cache.get(message.author.id)
+            const receipient = message.guild.members.cache.get(new_conv)
+
+            if (args.length === 0) {
+                return message.channel.send(`${member} is ${Math.floor(Math.random() * 100)}% down bad`)
+            }
+
+            if (receipient) {
+                return message.channel.send(`${receipient} is ${Math.floor(Math.random() * 100)}% down bad`)
+
+            }
+
+            else {
+                message.channel.send(`${member} is ${Math.floor(Math.random() * 100)}% down bad`)
+            }
+
+        }
 
         //HEROKU ERROR OCCURED PUSH OF THIS SECTION ? ROLLBACK?
         if (CMD_NAME === 'ban') {
