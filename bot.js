@@ -113,11 +113,37 @@ client.on('messageCreate', async (message) => {
     //     message.channel.send('Jared has bitch and moaned 5 times today. Nothing to see here, just being a bitch again.')
     // }
 
+    if ((message.content) === '!nextmap') {
+        const getNextMap = async () => {
+            let current_map = await getMap()
+            if (current_map.battle_royale.current.remainingMins >= 120 && current_map.battle_royale.current.remainingMins < 180) {
+                remaining_time = current_map.battle_royale.current.remainingMins - 120
+                timee = `2 hours and ${remaining_time}`
+            }
+            else if (current_map.battle_royale.current.remainingMins >= 60 && current_map.battle_royale.current.remainingMins < 120) {
+                remaining_time = current_map.battle_royale.current.remainingMins - 60
+                timee = `1 hour and ${remaining_time}`
+            }
+
+            else if (current_map.battle_royale.current.remainingMins < 60) {
+                remaining_time = current_map.battle_royale.current.remainingMins
+                timee = `${remaining_time}`
+            }
+
+            else {
+                remaining_time = current_map.battle_royale.current.remainingMins
+                timee = `${remaining_time}`
+            }
+
+            // message.channel.send(`Current map is ${current_map.battle_royale.current.map} and rotates in ${timee} minutes :slight_smile:`)
+            message.channel.send(`Current Map: ${current_map.battle_royale.current.map}, ${timee} minutes till ${current_map.battle_royale.next.map} for ${current_map.battle_royale.next.DurationInMinutes} minutes :slight_smile:`)
+        }
+        getNextMap()
+    }
     if ((message.content) === '!map') {
         if (message.channelId == 801881827916513320 || message.channelId == 803352079519318098 || message.channelId == 933130158595002371) {
             const getCurrentMap = async () => {
                 let current_map = await getMap()
-                console.log(current_map)
                 if (current_map.battle_royale.current.remainingMins >= 120 && current_map.battle_royale.current.remainingMins < 180) {
                     remaining_time = current_map.battle_royale.current.remainingMins - 120
                     timee = `2 hours and ${remaining_time}`
@@ -249,7 +275,7 @@ client.on('messageCreate', async (message) => {
             }
             const member = message.guild.members.cache.get(new_conv)
 
-            console.log(member)
+            // console.log(member)
             const banMessage = [
                 'sike nerd :rofl:',
                 'has been sent into the void KEKW',
