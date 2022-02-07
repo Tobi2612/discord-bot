@@ -2,6 +2,9 @@ const dotenv = require('dotenv');
 const axios = require('axios');
 const { Client, Intents, Message } = require('discord.js');
 const TwitchApi = require("node-twitch").default;
+const { expDadJoke, expJoke } = require('./commands/joke')
+const { expCheckLive } = require('./commands/twitch')
+const { expBan, expDown, expPetty, expToxic } = require('./commands/basic')
 
 
 let liveState = 0
@@ -181,131 +184,26 @@ client.on('messageCreate', async (message) => {
             .split(/\s+/);
 
         if (CMD_NAME === 'toxic') {
-            let conv2 = args[0]
-            if (conv2) {
-                var new_conv = conv2.replace(/[\\<>@#&!]/g, "");
-            }
-
-
-            const member = message.guild.members.cache.get(message.author.id)
-            const receipient = message.guild.members.cache.get(new_conv)
-
-            if (args.length === 0) {
-                return message.channel.send(`${member} is being ${Math.floor(Math.random() * 100)}% toxic`)
-            }
-
-            if (receipient) {
-                return message.channel.send(`${receipient} is being ${Math.floor(Math.random() * 100)}% toxic`)
-
-            }
-
-            else {
-                message.channel.send(`${member} is being ${Math.floor(Math.random() * 100)}% toxic`)
-            }
-
+            let toxicMessage = expToxic(message, args[0])
+            message.channel.send(toxicMessage)
         }
 
         if (CMD_NAME === 'petty') {
-            let conv2 = args[0]
-            if (conv2) {
-                var new_conv = conv2.replace(/[\\<>@#&!]/g, "");
-            }
-
-
-            const member = message.guild.members.cache.get(message.author.id)
-            const receipient = message.guild.members.cache.get(new_conv)
-
-            if (args.length === 0) {
-                return message.channel.send(`${member} is being ${Math.floor(Math.random() * 100)}% petty`)
-            }
-
-            if (receipient) {
-                return message.channel.send(`${receipient} is being ${Math.floor(Math.random() * 100)}% petty`)
-
-            }
-
-            else {
-                message.channel.send(`${member} is being ${Math.floor(Math.random() * 100)}% petty`)
-            }
+            let pettyMessage = expPetty(message, args[0])
+            message.channel.send(pettyMessage)
 
         }
 
         if (CMD_NAME === 'down') {
-            let conv2 = args[0]
-            if (conv2) {
-                var new_conv = conv2.replace(/[\\<>@#&!]/g, "");
-            }
-
-
-            const member = message.guild.members.cache.get(message.author.id)
-            const receipient = message.guild.members.cache.get(new_conv)
-
-            if (args.length === 0) {
-                return message.channel.send(`${member} is ${Math.floor(Math.random() * 100)}% down bad`)
-            }
-
-            if (receipient) {
-                return message.channel.send(`${receipient} is ${Math.floor(Math.random() * 100)}% down bad`)
-
-            }
-
-            else {
-                message.channel.send(`${member} is ${Math.floor(Math.random() * 100)}% down bad`)
-            }
+            let downMessage = expDown(message, args[0])
+            message.channel.send(downMessage)
 
         }
 
-        //HEROKU ERROR OCCURED PUSH OF THIS SECTION ? ROLLBACK?
         if (CMD_NAME === 'ban') {
-            // let conv = [...args[0]]
-            let conv2 = args[0]
-            // // let nooo = parseInt(args[0])
-            // // console.log(`Conv to array: ${nooo}`)
-            // conv.pop()
-            // conv2 = conv.slice(3)
-            // let strr = conv2.join('')
-            // console.log(`Conv before regex: ${conv2}`)
+            let banMessage = expBan(message, args[0])
+            message.channel.send(banMessage)
 
-
-            let new_conv = conv2.replace(/[\\<>@#&!]/g, "");
-            // console.log(`Conv to array: ${conv}`)
-            // console.log(`Conv after regex: ${new_conv}`)
-            if (new_conv == '932996374562238474') {
-                return message.reply(`Ban who??? :rofl: :rofl:`)
-            }
-            const member = message.guild.members.cache.get(new_conv)
-
-            // console.log(member)
-            const banMessage = [
-                'sike nerd :rofl:',
-                'has been sent into the void KEKW',
-                'https://tenor.com/view/moe-simpsons-barney-e-moe-gif-23054386',
-                'https://tenor.com/view/among-us-ban-among-us-ban-imposter-ban-gif-18884723',
-                'https://tenor.com/view/spongebob-ban-pubg-lite-banned-rainbow-gif-16212382',
-                'https://tenor.com/view/bongocat-banhammer-ban-hammer-bongo-gif-18219363',
-                'https://tenor.com/view/moe-simpsons-barney-e-moe-gif-23054386',
-                'https://tenor.com/view/mario-yoshi-hammer-hit-gif-14834810',
-                'https://tenor.com/view/go-home-leave-golden-girls-just-go-you-have-to-go-now-gif-22287144',
-                'https://tenor.com/view/throw-him-out-gif-14876020',
-                'https://tenor.com/view/moe-simpsons-barney-e-moe-gif-23054386',
-                'https://tenor.com/view/gtfo-fresh-prince-thrown-out-kicked-out-gif-5919348',
-                'https://tenor.com/view/get-out-out-close-door-gif-12559327',
-                'https://tenor.com/view/kicked-out-kicked-thrown-out-get-out-of-the-house-gif-23257249',
-                'https://tenor.com/view/fail-bounce-mattress-bed-prank-gif-13006950',
-                'https://tenor.com/view/drag-dragging-gif-11404125',
-                'https://tenor.com/view/fire-throw-out-kick-kick-out-boot-out-gif-15900658',
-                'https://tenor.com/view/moe-simpsons-barney-e-moe-gif-23054386',
-            ]
-            if (member) {
-                min = Math.ceil(0);
-                max = Math.floor((banMessage.length) - 1);
-                let banRandom = Math.floor(Math.random() * (max - min + 1)) + min;
-                message.channel.send(`${member} ${banMessage[banRandom]}`)
-            }
-
-            else {
-                message.reply(`Ban who??? :neutral_face:`)
-            }
         }
     }
 
@@ -315,66 +213,24 @@ client.on('messageCreate', async (message) => {
             .trim()
             .substring(PREFIX.length)
             .split(/\s+/);
-        // if (CMD_NAME === 'kick') {
-        //     if (args.length === 0) return (message.reply('Please provide an argument'))
-        //     const member = message.guild.members.cache.get(args[0])
-        //     console.log(member)
-        //     message.channel.send(`${member} has been banned KEKW`)
-        // }
-
 
 
         if (CMD_NAME === 'live') {
-            if (args.length === 0) return (message.reply('Please provide an argument'))
-            const checkLive = async () => {
-                liveee = await goLive2(args[0])
+            if (args.length === 0) return (message.reply('Please provide a valid twitch channel'))
 
-                if (liveee) {
-                    message.reply(`${liveee.data[0].user_name} is currently live at https://www.twitch.tv/${liveee.data[0].user_login} `)
-                }
-
-                else {
-                    message.reply(`${args[0]} is not live!`)
-                }
-            }
-            checkLive()
+            let checkLive = await expCheckLive(args[0])
+            message.reply(checkLive)
         }
 
         if (CMD_NAME === 'joke') {
-            const getJoke = async () => {
-                let jokes = await getJokes('joke')
+            let exportedJoke = await expJoke()
+            message.reply(exportedJoke)
 
-                if (jokes.error == true) {
-                    message.reply(`I don't have a joke for you at the moment, try again in a minute! \nMy bad :neutral_face:`)
-                }
-                if (jokes.type == 'single') {
-                    message.reply(`${jokes.joke}`)
-                }
-
-                if (jokes.type == 'twopart') {
-                    message.reply(`${jokes.setup} \n\n\n ${jokes.delivery}`)
-                }
-
-            }
-            getJoke()
         }
 
         if (CMD_NAME === 'dadjoke') {
-            const getDadJoke = async () => {
-                let jokes = await getJokes('dadjoke')
-
-                if (jokes) {
-                    if (jokes.status == 200) {
-                        message.reply(`${jokes.joke}`)
-                    }
-                }
-
-                else {
-                    message.reply(`I don't have a joke for you at the moment, try again in a minute! \nMy bad :neutral_face:`)
-                }
-
-            }
-            getDadJoke()
+            let exportedDadJoke = await expDadJoke()
+            message.reply(exportedDadJoke)
         }
     }
 })
@@ -413,49 +269,6 @@ const getMap = async () => {
     }
 }
 
-const goLive2 = async (userr) => {
-    const streams = await twitch.getStreams({ channel: userr });
-    let type = streams.data[0] || false
-    if (type.type) {
-        if (type.type == 'live') {
-            return streams
-        }
-    }
-    else {
-        return false
-    }
-}
-
-const getJokes = async (type_of_joke) => {
-    if (type_of_joke == 'joke') {
-        try {
-            let response = await axios.get('https://v2.jokeapi.dev/joke/Any?blacklistFlags=religious,political,racist,sexist')
-            let joke = response.data
-            return joke
-        } catch (e) {
-            // console.error(e)
-        }
-    }
-
-    if (type_of_joke == 'dadjoke') {
-        try {
-            const options = {
-                headers: {
-                    'Accept': 'application/json',
-                    "User-Agent": "axios 0.21.1"
-                }
-            }
-            let dad_response = await axios.get('https://icanhazdadjoke.com/', options)
-
-            let dadjoke = dad_response.data
-            // console.log(dadjoke)
-            return dadjoke
-
-        } catch (e) {
-            // console.error(e)
-        }
-    }
-}
 
 setInterval(goLive, 180000)
 
