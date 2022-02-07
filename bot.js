@@ -137,7 +137,8 @@ client.on('messageCreate', async (message) => {
                 // console.log(`${mp}`)
                 // const test = 'worlds_edge_rotation'
                 // console.log(`${emoji.test}`)
-                message.channel.send(`Current Map: ${current_map.battle_royale.current.map}, ${timee} ${emoji.current_map.battle_royale.current.code} \n Next Map: ${current_map.battle_royale.next.map}, ${next_timee} ${emoji.current_map.battle_royale.next.code}`)
+                message.channel.send(`Current Map: ${current_map.battle_royale.current.map}, ${timee}  \n Next Map: ${current_map.battle_royale.next.map}, ${next_timee}`)
+                // message.channel.send(`Current Map: ${current_map.battle_royale.current.map}, ${timee} ${emoji.current_map.battle_royale.current.code} \n Next Map: ${current_map.battle_royale.next.map}, ${next_timee} ${emoji.current_map.battle_royale.next.code}`)
             }
             getCurrentMap()
         }
