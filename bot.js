@@ -2,6 +2,7 @@ const dotenv = require('dotenv');
 const axios = require('axios');
 const { Client, Intents, Message } = require('discord.js');
 const TwitchApi = require("node-twitch").default;
+const humanizeDuration = require("humanize-duration");
 const { expDadJoke, expJoke } = require('./commands/joke')
 const { expCheckLive } = require('./commands/twitch')
 const { expBan, expDown, expPetty, expToxic } = require('./commands/basic')
@@ -79,11 +80,15 @@ client.on('messageCreate', async (message) => {
 
     }
 
+
     // if ((message.content) == '!down') {
     //     // console.log(message.author)
     //     message.reply(`You are ${Math.floor(Math.random() * 100)}% down bad.`)
     // }
 
+    if ((message.content) == '!gabe') {
+        message.channel.send(`https://tenor.com/view/player-playa-youre-a-player-youre-a-playa-dave-chappelle-gif-4728520`)
+    }
     if ((message.content) == '!21') {
         message.reply(`SKRAIGHT UP`)
     }
@@ -106,68 +111,33 @@ client.on('messageCreate', async (message) => {
     if ((message.content) === '!cap') {
         message.channel.send('Fat Cock')
     }
-    // if ((message.content) === '!jess') {
-    //     message.channel.send(`But Jeff on thursdays :slight_smile:`)
-    // }
     // if ((message.content) === '!sno') {
     //     message.channel.send('hmm hook me up mijah')
     // }
-    // if ((message.content) === '!jared') {
-    //     message.channel.send('Jared has bitch and moaned 5 times today. Nothing to see here, just being a bitch again.')
-    // }
 
-    if ((message.content) === '!nextmap') {
-        const getNextMap = async () => {
-            let current_map = await getMap()
-            if (current_map.battle_royale.current.remainingMins >= 120 && current_map.battle_royale.current.remainingMins < 180) {
-                remaining_time = current_map.battle_royale.current.remainingMins - 120
-                timee = `2 hours and ${remaining_time}`
-            }
-            else if (current_map.battle_royale.current.remainingMins >= 60 && current_map.battle_royale.current.remainingMins < 120) {
-                remaining_time = current_map.battle_royale.current.remainingMins - 60
-                timee = `1 hour and ${remaining_time}`
-            }
 
-            else if (current_map.battle_royale.current.remainingMins < 60) {
-                remaining_time = current_map.battle_royale.current.remainingMins
-                timee = `${remaining_time}`
-            }
 
-            else {
-                remaining_time = current_map.battle_royale.current.remainingMins
-                timee = `${remaining_time}`
-            }
-
-            // message.channel.send(`Current map is ${current_map.battle_royale.current.map} and rotates in ${timee} minutes :slight_smile:`)
-            message.channel.send(`Current Map: ${current_map.battle_royale.current.map}, ${timee} minutes till ${current_map.battle_royale.next.map} for ${current_map.battle_royale.next.DurationInMinutes} minutes :slight_smile:`)
-        }
-        getNextMap()
-    }
     if ((message.content) === '!map') {
+
         if (message.channelId == 801881827916513320 || message.channelId == 803352079519318098 || message.channelId == 933130158595002371) {
             const getCurrentMap = async () => {
                 let current_map = await getMap()
-                if (current_map.battle_royale.current.remainingMins >= 120 && current_map.battle_royale.current.remainingMins < 180) {
-                    remaining_time = current_map.battle_royale.current.remainingMins - 120
-                    timee = `2 hours and ${remaining_time}`
-                }
-                else if (current_map.battle_royale.current.remainingMins >= 60 && current_map.battle_royale.current.remainingMins < 120) {
-                    remaining_time = current_map.battle_royale.current.remainingMins - 60
-                    timee = `1 hour and ${remaining_time}`
+                const emoji = {
+                    worlds_edge_rotation: ':slight_smile:',
+                    storm_point_rotation: ':unamused:',
+                    olympus_rotation: ':heart_eyes:',
+                    kings_canyon_rotation: ':neutral_face:'
+
                 }
 
-                else if (current_map.battle_royale.current.remainingMins < 60) {
-                    remaining_time = current_map.battle_royale.current.remainingMins
-                    timee = `${remaining_time}`
-                }
-
-                else {
-                    remaining_time = current_map.battle_royale.current.remainingMins
-                    timee = `${remaining_time}`
-                }
-
-                message.channel.send(`Current map is ${current_map.battle_royale.current.map} and rotates in ${timee} minutes :slight_smile:`)
-                // message.channel.send(`Current Map: ${current_map.battle_royale.current.map}, ${timee} minutes till ${current_map.battle_royale.next.map} for ${current_map.battle_royale.next.DurationInMinutes} minutes :slight_smile:`)
+                // console.log(current_map.battle_royale.current.)
+                let timee = humanizeDuration(current_map.battle_royale.current.remainingMins * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
+                let next_timee = humanizeDuration(current_map.battle_royale.next.DurationInMinutes * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
+                // const mp = current_map.battle_royale.current.code
+                // console.log(`${mp}`)
+                // const test = 'worlds_edge_rotation'
+                // console.log(`${emoji.test}`)
+                message.channel.send(`Current Map: ${current_map.battle_royale.current.map}, ${timee} ${emoji.current_map.battle_royale.current.code} \n Next Map: ${current_map.battle_royale.next.map}, ${next_timee} ${emoji.current_map.battle_royale.next.code}`)
             }
             getCurrentMap()
         }
