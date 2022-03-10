@@ -206,7 +206,6 @@ client.on('messageCreate', async (message) => {
 })
 
 const goLive = async () => {
-    console.log('Checking.....')
     const streams = await twitch.getStreams({ channel: "spaceyflower21" });
     let type = streams.data[0] || false
 
