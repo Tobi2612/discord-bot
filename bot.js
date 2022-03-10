@@ -206,18 +206,18 @@ client.on('messageCreate', async (message) => {
 })
 
 const goLive = async () => {
+    console.log('Checking.....')
     const streams = await twitch.getStreams({ channel: "spaceyflower21" });
     let type = streams.data[0] || false
-
-    const stream_started = streams.data[0].started_at
-    const stream_start_time = new Date(stream_started)
-    const streamstart_plus6minutes = new Date(stream_start_time.getTime() + 4 * 60000);
-
-    const current_time = new Date();
 
 
     if (type.type) {
         if (type.type == 'live') {
+            const stream_started = streams.data[0].started_at
+            const stream_start_time = new Date(stream_started)
+            const streamstart_plus6minutes = new Date(stream_start_time.getTime() + 4 * 60000);
+
+            const current_time = new Date();
             if (liveState == 0) {
                 if (streamstart_plus6minutes.getTime() > current_time.getTime()) {
                     // console.log('Live')
