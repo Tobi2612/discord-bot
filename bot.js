@@ -153,6 +153,10 @@ client.on('messageCreate', async (message) => {
             .substring(PREFIX.length)
             .split(/\s+/);
 
+        if (CMD_NAME === 'chewy') {
+            let toxicMessage = 'bro who the FUCK is chewy :angry:'
+            message.channel.send(toxicMessage)
+        }
         if (CMD_NAME === 'toxic') {
             let toxicMessage = expToxic(message, args[0])
             message.channel.send(toxicMessage)
