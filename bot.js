@@ -64,19 +64,16 @@ client.on('messageCreate', async (message) => {
 
     if ((message.content.toLowerCase().includes('good morning'))) {
         message.channel.send(`Good morning <@${message.author.id}>`)
-        // message.channel.send('@everyone');
 
     }
 
     if ((message.content.toLowerCase().includes('ok bye'))) {
         message.channel.send(`https://tenor.com/view/bye-okay-slide-gif-15172486`)
-        // message.channel.send('@everyone');
 
     }
 
     if ((message.content.toLowerCase().includes('ok hi'))) {
         message.channel.send(`https://tenor.com/view/ok-hi-hi-hello-ok-bye-ok-hi-kid-gif-19799968`)
-        // message.channel.send('@everyone');
 
     }
 
@@ -122,13 +119,7 @@ client.on('messageCreate', async (message) => {
         if (message.channelId == 801881827916513320 || message.channelId == 803352079519318098 || message.channelId == 933130158595002371) {
             const getCurrentMap = async () => {
                 let current_map = await getMap()
-                const emoji = {
-                    worlds_edge_rotation: ':slight_smile:',
-                    storm_point_rotation: ':unamused:',
-                    olympus_rotation: ':heart_eyes:',
-                    kings_canyon_rotation: ':neutral_face:'
 
-                }
 
                 // console.log(current_map.battle_royale.current.)
                 let timee = humanizeDuration(current_map.battle_royale.current.remainingMins * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
@@ -223,7 +214,6 @@ const goLive = async () => {
             const current_time = new Date();
             if (liveState == 0) {
                 if (streamstart_plus6minutes.getTime() > current_time.getTime()) {
-                    // console.log('Live')
                     liveState = 1
                     const channel = await client.channels.fetch("792836781049511938");
                     channel.send(`@everyone ${type.user_name} is currently live at https://www.twitch.tv/${type.user_login} `)
