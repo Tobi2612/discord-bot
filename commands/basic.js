@@ -44,7 +44,7 @@ exports.expBan = (message, toBan) => {
 exports.expDown = (message, down) => {
     let conv2 = down
     let new_conv = '1234'
-    console.log(conv2)
+
     if (conv2) {
         new_conv = conv2.replace(/[\\<>@#&!]/g, "");
     }

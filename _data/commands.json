@@ -1,0 +1,72 @@
+[
+    {
+        "_id": "62acc42e707f3c677f036af7",
+        "cmd_name": "gabe",
+        "guild_id": "792836780473974806",
+        "cmd_details": "https://tenor.com/view/player-playa-youre-a-player-youre-a-playa-dave-chappelle-gif-4728520",
+        "created_by": "591755626464673802"
+    },
+    {
+        "_id": "62acc42e707f3c678f036af7",
+        "cmd_name": "21",
+        "guild_id": "792836780473974806",
+        "cmd_details": "SKRAIGHT UP",
+        "created_by": "591755626464673802"
+    },
+    {
+        "_id": "62acc42e707f3c679f036af7",
+        "cmd_name": "9+10",
+        "guild_id": "792836780473974806",
+        "cmd_details": "21 :SpaceyHype:",
+        "created_by": "591755626464673802"
+    },
+    {
+        "_id": "62acc42e707f3c680f036af7",
+        "cmd_name": "ben",
+        "guild_id": "792836780473974806",
+        "cmd_details": "Super clutch :slight_smile:",
+        "created_by": "591755626464673802"
+    },
+    {
+        "_id": "62acc42e707f3c681f036af7",
+        "cmd_name": "cap",
+        "guild_id": "792836780473974806",
+        "cmd_details": "Fat Cock",
+        "created_by": "591755626464673802"
+    },
+    {
+        "_id": "62acc42e707f3c682f036af7",
+        "cmd_name": "chewy",
+        "guild_id": "792836780473974806",
+        "cmd_details": "bro who the FUCK is chewy :angry:",
+        "created_by": "591755626464673802"
+    },
+    {
+        "_id": "62acc42e707f3c683f036af7",
+        "cmd_name": "sus",
+        "guild_id": "792836780473974806",
+        "cmd_details": "$(user) is $(random)% sus.",
+        "created_by": "591755626464673802"
+    },
+    {
+        "_id": "62acc42e707f3c684f036af7",
+        "cmd_name": "down",
+        "guild_id": "792836780473974806",
+        "cmd_details": "$(user) is $(random)% down bad",
+        "created_by": "591755626464673802"
+    },
+    {
+        "_id": "62acc42e707f3c685f036af7",
+        "cmd_name": "petty",
+        "guild_id": "792836780473974806",
+        "cmd_details": "$(user) is being $(random)% petty",
+        "created_by": "591755626464673802"
+    },
+    {
+        "_id": "62acc42e707f3c686f036af7",
+        "cmd_name": "toxic",
+        "guild_id": "792836780473974806",
+        "cmd_details": "$(user) is being $(random)% toxic",
+        "created_by": "591755626464673802"
+    }
+]

@@ -1,16 +1,20 @@
 const dotenv = require('dotenv');
 const axios = require('axios');
+const connectDB = require('./config/db')
 const { Client, Intents, Message } = require('discord.js');
 const TwitchApi = require("node-twitch").default;
 const humanizeDuration = require("humanize-duration");
 const { expDadJoke, expJoke } = require('./commands/joke')
 const { expCheckLive } = require('./commands/twitch')
-const { expBan, expDown, expPetty, expToxic } = require('./commands/basic')
+const { expBan } = require('./commands/basic');
+const { createCommand, updateCommand, deleteCommand, readCommand } = require('./commands/db_commands');
 
 
 let liveState = 0
 //load env vars
 dotenv.config({ path: './.env' })
+
+connectDB()
 
 const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES] });
 const PREFIX = '$';
@@ -31,15 +35,67 @@ client.on('messageCreate', async (message) => {
         return
     };
 
-    // console.log(`${message.author.tag}: ${message.content}`)
 
-    // if (message.author.id == 135846420421804034) {
-    //     return message.reply(`No one cares`)
-    // }
 
-    // if (message.channelId == 801933050949926984) {
-    //     return message.channel.send(`:eyes:`)
-    // }
+    // DB SECTION
+
+    if (message.content.startsWith('!')) {
+        const [CMD_NAME, ...args] = message.content.toLowerCase()
+            .trim()
+            .substring(PREFIX.length)
+            .split(/\s+/);
+
+        if (CMD_NAME === 'cmd') {
+            let owner = message.member.roles.cache.has('802217873438277673');
+            let spacecadets = message.member.roles.cache.has('802218250062528513');
+            let admin = message.member.roles.cache.has('802217425323556874');
+            let new_role = message.member.roles.cache.has('859049470906204180');
+
+            let body = {
+                created_by: message.author.id,
+                cmd_name: args[1],
+                guild_id: message.guildId,
+                cmd_details: args.splice(2).join(' '),
+                cmd_counter: 0
+            }
+
+
+            switch (args[0]) {
+                case 'add':
+                    //check if role is able to create commands
+                    if (owner || spacecadets || admin || new_role) {
+
+                        const add_command = await createCommand(body);
+                        message.channel.send(`${add_command.msg}`);
+                    }
+                    break;
+                case 'edit':
+                    //check if role is able to create commands
+                    if (owner || spacecadets || admin || new_role) {
+
+                        const edit_command = await updateCommand(body)
+                        message.channel.send(`${edit_command.msg}`);
+                    }
+                    break;
+                case 'del':
+                    //check if role is able to create commands
+                    if (owner || spacecadets || admin || new_role) {
+
+                        const del_command = await deleteCommand(body)
+                        message.channel.send(`${del_command.msg}`);
+                    }
+                    break;
+
+                default:
+                    message.channel.send(`Incorrect format`);
+                    break;
+            }
+        }
+
+
+
+    }
+
 
     if ((message.content).toLowerCase() == 'hello') {
         message.channel.send('Hello');
@@ -57,8 +113,6 @@ client.on('messageCreate', async (message) => {
         else {
             message.reply(` What??? :face_with_raised_eyebrow:`)
         }
-        // message.reply(` What??? :face_with_raised_eyebrow:`)
-        // message.channel.send('@everyone');
 
     }
 
@@ -78,40 +132,9 @@ client.on('messageCreate', async (message) => {
     }
 
 
-    // if ((message.content) == '!down') {
-    //     // console.log(message.author)
-    //     message.reply(`You are ${Math.floor(Math.random() * 100)}% down bad.`)
-    // }
-
-    if ((message.content) == '!gabe') {
-        message.channel.send(`https://tenor.com/view/player-playa-youre-a-player-youre-a-playa-dave-chappelle-gif-4728520`)
-    }
-    if ((message.content) == '!21') {
-        message.reply(`SKRAIGHT UP`)
-    }
-    if ((message.content) == '!9+10') {
-        message.reply(`21 :SpaceyHype:`)
-    }
-
-    if ((message.content) == '!sus') {
-        message.reply(`You are ${Math.floor(Math.random() * 100)}% sus.`)
-    }
-
     if ((message.content) === '!live') {
         message.channel.send('Hey @everyone, Jess is now live on https://www.twitch.tv/spaceyflower21 ! Go check it out!')
     }
-    if ((message.content) === '!ben') {
-        message.channel.send('Super clutch :slight_smile:')
-    }
-
-    //HEROKU ERROR OCCURED PUSH OF THIS SECTION ? ROLLBACK?
-    if ((message.content) === '!cap') {
-        message.channel.send('Fat Cock')
-    }
-    // if ((message.content) === '!sno') {
-    //     message.channel.send('hmm hook me up mijah')
-    // }
-
 
 
     if ((message.content) === '!map') {
@@ -119,15 +142,11 @@ client.on('messageCreate', async (message) => {
         if (message.channelId == 801881827916513320 || message.channelId == 803352079519318098 || message.channelId == 933130158595002371) {
             const getCurrentMap = async () => {
                 let current_map = await getMap()
+                // console.log(current_map)
 
-
-                // console.log(current_map.battle_royale.current.)
                 let timee = humanizeDuration(current_map.battle_royale.current.remainingMins * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
                 let next_timee = humanizeDuration(current_map.battle_royale.next.DurationInMinutes * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
-                // const mp = current_map.battle_royale.current.code
-                // console.log(`${mp}`)
-                // const test = 'worlds_edge_rotation'
-                // console.log(`${emoji.test}`)
+
                 message.channel.send(`Current Map: ${current_map.battle_royale.current.map}, ${timee}  \nNext Map: ${current_map.battle_royale.next.map}, ${next_timee}`)
             }
             getCurrentMap()
@@ -139,36 +158,45 @@ client.on('messageCreate', async (message) => {
     }
 
     if (message.content.startsWith('!')) {
-        const [CMD_NAME, ...args] = message.content
+        const [CMD_NAME, ...args] = message.content.toLowerCase()
             .trim()
             .substring(PREFIX.length)
             .split(/\s+/);
 
-        if (CMD_NAME === 'chewy') {
-            let toxicMessage = 'bro who the FUCK is chewy :angry:'
-            message.channel.send(toxicMessage)
-        }
-        if (CMD_NAME === 'toxic') {
-            let toxicMessage = expToxic(message, args[0])
-            message.channel.send(toxicMessage)
-        }
-
-        if (CMD_NAME === 'petty') {
-            let pettyMessage = expPetty(message, args[0])
-            message.channel.send(pettyMessage)
+        let body = {
+            sent_by: message.author.id,
+            cmd_name: CMD_NAME,
+            guild_id: message.guildId,
+            user: ''
 
         }
 
-        if (CMD_NAME === 'down') {
-            let downMessage = expDown(message, args[0])
-            message.channel.send(downMessage)
 
+        let conv2 = args[0];
+        let new_conv = '1234'
+        if (conv2) {
+            new_conv = conv2.replace(/[\\<>@#&!]/g, "");
         }
+        const receipient = message.guild.members.cache.get(new_conv)
 
-        if (CMD_NAME === 'ban') {
-            let banMessage = expBan(message, args[0])
-            message.channel.send(banMessage)
+        body.user = receipient;
 
+        switch (CMD_NAME) {
+            case 'ban':
+                let banMessage = expBan(message, args[0])
+                message.channel.send(banMessage)
+                break;
+            case 'cmd':
+                break;
+            case 'map':
+                break;
+            case 'live':
+                break;
+
+            default:
+                const responsee = await readCommand(body)
+                message.channel.send(responsee.msg)
+                break;
         }
     }
 
