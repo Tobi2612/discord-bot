@@ -10,16 +10,11 @@ exports.readCommand = asyncHandler(async (command_details) => {
 
 
     if (publishedCommand && ((guild_id == publishedCommand.guild_id) || (guild_id == '803352078620557374'))) {
-        // if (publishedCommand) {
 
         if (publishedCommand.cmd_details.includes(`$(count)`)) {
 
             publishedCommand.cmd_counter += 1;
             await publishedCommand.save();
-            // await Command.findOneAndUpdate(cmd_name, { cmd_counter: publishedCommand.cmd_counter }, {
-            //     new: true,
-            //     runValidators: true
-            // });
 
 
             publishedCommand.cmd_details = publishedCommand.cmd_details.replace('$(count)', `${publishedCommand.cmd_counter}`)
