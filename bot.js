@@ -47,6 +47,7 @@ client.on('messageCreate', async (message) => {
 
         if (CMD_NAME === 'cmd') {
             let owner = message.member.roles.cache.has('802217873438277673');
+            let test_server_role = message.member.roles.cache.has('988454685704847380');
             let spacecadets = message.member.roles.cache.has('802218250062528513');
             let admin = message.member.roles.cache.has('802217425323556874');
             let new_role = message.member.roles.cache.has('859049470906204180');
@@ -63,7 +64,7 @@ client.on('messageCreate', async (message) => {
             switch (args[0]) {
                 case 'add':
                     //check if role is able to create commands
-                    if (owner || spacecadets || admin || new_role) {
+                    if (owner || spacecadets || admin || new_role || test_server_role) {
 
                         const add_command = await createCommand(body);
                         message.channel.send(`${add_command.msg}`);
@@ -71,7 +72,7 @@ client.on('messageCreate', async (message) => {
                     break;
                 case 'edit':
                     //check if role is able to create commands
-                    if (owner || spacecadets || admin || new_role) {
+                    if (owner || spacecadets || admin || new_role || test_server_role) {
 
                         const edit_command = await updateCommand(body)
                         message.channel.send(`${edit_command.msg}`);
@@ -79,7 +80,7 @@ client.on('messageCreate', async (message) => {
                     break;
                 case 'del':
                     //check if role is able to create commands
-                    if (owner || spacecadets || admin || new_role) {
+                    if (owner || spacecadets || admin || new_role || test_server_role) {
 
                         const del_command = await deleteCommand(body)
                         message.channel.send(`${del_command.msg}`);
