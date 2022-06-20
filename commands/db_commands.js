@@ -9,7 +9,7 @@ exports.readCommand = asyncHandler(async (command_details) => {
     let publishedCommand = await Command.findOne({ cmd_name });
 
 
-    if (publishedCommand && ((guild_id == publishedCommand.guild_id) || (guild_id == '803352078620557374'))) {
+    if (publishedCommand && ((guild_id == publishedCommand.guild_id) || (guild_id == '803352078620557374') || (guild_id == '933130158595002368'))) {
 
         if (publishedCommand.cmd_details.includes(`$(count)`)) {
 
