@@ -193,6 +193,8 @@ client.on('messageCreate', async (message) => {
                 break;
             case 'live':
                 break;
+            case 'rank':
+                break;
 
             default:
                 const responsee = await readCommand(body)
