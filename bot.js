@@ -246,8 +246,37 @@ const goLive = async () => {
             if (liveState == 0) {
                 if (streamstart_plus6minutes.getTime() > current_time.getTime()) {
                     liveState = 1
+
+                    var thumbnail;
+                    async function getThumbnailUrl(){
+                        thumbnail = type.getThumbnailUrl();
+                    }
+                    getThumbnailUrl();
+
+                    let embeds = { 
+                        "content": `@everyone ${type.user_name} is currently live at https://www.twitch.tv/${type.user_login}`,
+                    "tts": false,
+                    "embeds": [
+                      {
+                        "type": "rich",
+                        "title": `${type.title}`,
+                        "description": "",
+                        "color": 0x4e00b3,
+                        "image": {
+                          "url": `${thumbnail}`,
+                          "height": 0,
+                          "width": 0
+                        },
+                        "author": {
+                            "name": `Twitch `
+                          },
+                        "url": `https://www.twitch.tv/${type.user_login}`
+                      }
+                    ]}
+
+               
                     const channel = await client.channels.fetch("792836781049511938");
-                    channel.send(`@everyone ${type.user_name} is currently live at https://www.twitch.tv/${type.user_login} `)
+                    channel.send(embeds);
                 }
 
                 else {
