@@ -134,7 +134,7 @@ client.on('messageCreate', async (message) => {
 
 
     if ((message.content) === '!live') {
-        message.channel.send('Hey @everyone, Jess is now live on https://www.twitch.tv/spaceyflower21 ! Go check it out!')
+        message.channel.send('Hey @everyone, Jess is now live on https://www.twitch.tv/spaceyflower21 ! Go check it out!!')
     }
 
 
