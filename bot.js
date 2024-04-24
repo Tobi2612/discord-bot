@@ -169,10 +169,9 @@ Next Map: ${current_map.br_ranked.next.map}, ${next_timee}`)
                 const getCurrentMap = async () => {
                     let current_map = await getMap()
 
-                    let timee = humanizeDuration(current_map.mixtape.current.remainingMins * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
                     let next_timee = humanizeDuration(current_map.mixtape.next.DurationInMinutes * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
-
-                    message.channel.send(`Current Event: ${current_map.mixtape.current.eventName} on ${current_map.mixtape.current.map}, ${timee}. 
+                    
+                    message.channel.send(`Current Event: ${current_map.mixtape.current.eventName} on ${current_map.mixtape.current.map}: ${current_map.mixtape.current.remainingTimer}. 
 Next Event: ${current_map.mixtape.next.eventName} on ${current_map.mixtape.next.map}, ${next_timee}`)
                 }
             getCurrentMap()
