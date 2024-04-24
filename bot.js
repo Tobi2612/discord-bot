@@ -138,20 +138,51 @@ client.on('messageCreate', async (message) => {
     }
 
 
-    if ((message.content) === '!map') {
+    if ((message.content) === '!map' || (message.content) === '!ranked' || (message.content) === '!mixtape'){
 
         if (message.channelId == 801881827916513320 || message.channelId == 803352079519318098 || message.channelId == 933130158595002371) {
-            const getCurrentMap = async () => {
-                let current_map = await getMap()
-                // console.log(current_map)
+           if ((message.content) === '!map') {
+                const getCurrentMap = async () => {
+                    let current_map = await getMap()
 
-                let timee = humanizeDuration(current_map.battle_royale.current.remainingMins * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
-                let next_timee = humanizeDuration(current_map.battle_royale.next.DurationInMinutes * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
+                    let timee = humanizeDuration(current_map.br_pubs.current.remainingMins * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
+                    let next_timee = humanizeDuration(current_map.br_pubs.next.DurationInMinutes * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
 
-                message.channel.send(`Current Map: ${current_map.battle_royale.current.map}, ${timee}  \nNext Map: ${current_map.battle_royale.next.map}, ${next_timee}`)
-            }
+                    message.channel.send(`Current Map: ${current_map.br_pubs.current.map}, ${timee}. 
+Next Map: ${current_map.br_pubs.next.map}, ${next_timee}`)
+                }
             getCurrentMap()
+            }
+            if ((message.content) === '!ranked') {
+                const getCurrentMap = async () => {
+                    let current_map = await getMap()
+
+                    let timee = humanizeDuration(current_map.br_ranked.current.remainingMins * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
+                    let next_timee = humanizeDuration(current_map.br_ranked.next.DurationInMinutes * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
+
+                    message.channel.send(`Current Map: ${current_map.br_ranked.current.map}, ${timee}. 
+Next Map: ${current_map.br_ranked.next.map}, ${next_timee}`)
+                }
+            getCurrentMap()
+            }
+            if ((message.content) === '!mixtape') {
+                const getCurrentMap = async () => {
+                    let current_map = await getMap()
+
+                    let timee = humanizeDuration(current_map.mixtape.current.remainingMins * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
+                    let next_timee = humanizeDuration(current_map.mixtape.next.DurationInMinutes * 60000, { delimiter: " and ", units: ["d", "h", "m"] });
+
+                    message.channel.send(`Current Event: ${current_map.mixtape.current.eventName} on ${current_map.mixtape.current.map}, ${timee}. 
+Next Event: ${current_map.mixtape.next.eventName} on ${current_map.mixtape.next.map}, ${next_timee}`)
+                }
+            getCurrentMap()
+            }
+
+            
         }
+        //br_ranked.current.remainingMins || br_ranked.next.DurationInMinutes
+        //mixtape.current.remainingTimer|| mixtape.next.DurationInMinutes
+        //mixtape.current.map && mixtape.current.eventName || mixtape.next.map && mixtape.next.eventName
 
         else {
             message.channel.send(`This command only works in the gaming channel :unamused:`)
@@ -190,6 +221,10 @@ client.on('messageCreate', async (message) => {
             case 'cmd':
                 break;
             case 'map':
+                break;
+            case 'ranked':
+                break;
+            case 'mixtape':
                 break;
             case 'live':
                 break;
