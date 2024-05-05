@@ -140,7 +140,7 @@ client.on('messageCreate', async (message) => {
 
     if ((message.content) === '!map' || (message.content) === '!ranked' || (message.content) === '!mixtape'){
 
-        if (message.channelId == 801881827916513320 || message.channelId == 803352079519318098 || message.channelId == 933130158595002371) {
+        if (message.channelId == 801881827916513320 || message.channelId == 803352079519318098 || message.channelId == 933130158595002371 || message.channelId == 1236752798159208609) {
            if ((message.content) === '!map') {
                 const getCurrentMap = async () => {
                     let current_map = await getMap()
