@@ -30,6 +30,30 @@ const server = app.listen(PORT, () => {
   console.log(`Web server is running on port ${PORT}`);
 });
 
+// Self-ping mechanism to prevent sleep
+const RENDER_EXTERNAL_URL =
+  process.env.RENDER_EXTERNAL_URL || `http://localhost:${PORT}`;
+
+function keepAlive() {
+  setInterval(async () => {
+    try {
+      const response = await axios.get(`${RENDER_EXTERNAL_URL}/health`);
+      console.log(
+        'Keep-alive ping sent:',
+        new Date().toISOString(),
+        response.status
+      );
+    } catch (error) {
+      console.error('Keep-alive ping failed:', error.message);
+    }
+  }, 0.49 * 60 * 1000); // Ping every 49 seconds
+}
+const prod_env = process.env.PROD_ENV || 'local';
+// Start the keep-alive mechanism
+if (prod_env == 'render') {
+  keepAlive();
+}
+
 server.on('error', error => {
   console.error('Server error:', error);
 });
@@ -372,7 +396,7 @@ const getMap = async () => {
   }
 };
 
-setInterval(goLive, 49000);
+setInterval(goLive, 180000);
 
 process.on('SIGTERM', () => {
   console.log('SIGTERM received. Shutting down gracefully...');
