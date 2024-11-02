@@ -15,11 +15,9 @@ const {
   readCommand,
 } = require('./commands/db_commands');
 
-// Initialize Express
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Add a basic health check endpoint
 app.get('/', (req, res) => {
   res.send('Discord bot is running!');
 });
@@ -28,17 +26,14 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'healthy', timestamp: new Date() });
 });
 
-// Start the express server
 const server = app.listen(PORT, () => {
   console.log(`Web server is running on port ${PORT}`);
 });
 
-// Handle server errors
 server.on('error', error => {
   console.error('Server error:', error);
 });
 
-// Your existing Discord bot code remains the same
 let liveState = 0;
 dotenv.config({ path: './.env' });
 
@@ -377,7 +372,7 @@ const getMap = async () => {
   }
 };
 
-setInterval(goLive, 180000);
+setInterval(goLive, 49000);
 
 process.on('SIGTERM', () => {
   console.log('SIGTERM received. Shutting down gracefully...');
