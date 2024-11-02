@@ -46,7 +46,7 @@ function keepAlive() {
     } catch (error) {
       console.error('Keep-alive ping failed:', error.message);
     }
-  }, 0.49 * 60 * 1000); // Ping every 49 seconds
+  }, 4 * 60 * 1000); // Ping every 4 minutes
 }
 const prod_env = process.env.PROD_ENV || 'local';
 // Start the keep-alive mechanism
