@@ -8,6 +8,7 @@ const express = require('express');
 const { expDadJoke, expJoke } = require('./commands/joke');
 const { expCheckLive } = require('./commands/twitch');
 const { expBan } = require('./commands/basic');
+const { RunPrompt } = require('./pkg/ai');
 const {
   createCommand,
   updateCommand,
@@ -277,6 +278,45 @@ Next Event: ${current_map.mixtape.next.eventName} on ${current_map.mixtape.next.
       case 'ban':
         let banMessage = expBan(message, args[0]);
         message.channel.send(banMessage);
+        break;
+      case 'ai':
+        const prompt = args.slice(0).join(' ');
+        let response = await RunPrompt(prompt);
+
+        const DISCORD_MAX_LENGTH = 2000;
+
+        if (response.length <= DISCORD_MAX_LENGTH) {
+          message.channel.send(response);
+        }
+
+        const chunks = [];
+        let start = 0;
+        while (start < response.length) {
+          const end = Math.min(start + DISCORD_MAX_LENGTH, response.length);
+          let chunk = response.substring(start, end);
+
+          if (end < response.length) {
+            const lastPeriod = chunk.lastIndexOf('.');
+            const lastSpace = chunk.lastIndexOf(' ');
+            const breakPoint = lastPeriod > 0 ? lastPeriod + 1 : lastSpace;
+
+            if (breakPoint > 0) {
+              chunk = response.substring(start, start + breakPoint);
+            }
+          }
+
+          if (chunk.trim().length > 0) {
+            chunks.push(chunk.trim());
+          }
+          start += chunk.length;
+        }
+        if (chunks.length > 0) {
+          for (const chunk of chunks) {
+            message.channel.send(chunk);
+          }
+        } else {
+          message.channel.send('No valid response generated.');
+        }
         break;
       case 'cmd':
         break;
