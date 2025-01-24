@@ -7,17 +7,17 @@ const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
 exports.RunPrompt = async prompt => {
   try {
-    // const result = await model.generateContent(prompt);
+    const result = await model.generateContent(prompt);
 
-    const result = await model.generateContent({
-      contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      generationConfig: {
-        // maxOutputTokens: MAX_TOKENS,
-        temperature: 0.5, // Controls randomness (0-1)
-        topK: 40, // Limits vocabulary diversity
-        topP: 0.92,
-      },
-    });
+    // const result = await model.generateContent({
+    //   contents: [{ role: 'user', parts: [{ text: prompt }] }],
+    //   generationConfig: {
+    //     // maxOutputTokens: MAX_TOKENS,
+    //     temperature: 0.5, // Controls randomness (0-1)
+    //     topK: 40, // Limits vocabulary diversity
+    //     topP: 0.92,
+    //   },
+    // });
 
     return result.response.text();
   } catch (error) {

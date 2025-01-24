@@ -287,6 +287,7 @@ Next Event: ${current_map.mixtape.next.eventName} on ${current_map.mixtape.next.
 
         if (response.length <= DISCORD_MAX_LENGTH) {
           message.channel.send(response);
+          break;
         }
 
         const chunks = [];
